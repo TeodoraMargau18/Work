@@ -1,6 +1,9 @@
 package com.playtika.week5.java.GamesSpringBackend.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity()
 //Dc nu dat @Table=> acelasi e si numele tabelei
@@ -34,6 +37,10 @@ public class Player {
     @Column(name = "player_gender")
     @Enumerated(EnumType.STRING)
     private PlayerGender gender;
+
+    @Column(name = "player_birthdate")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
 
     public long getId() {
         return id;
@@ -75,4 +82,11 @@ public class Player {
         this.gender = gender;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }
