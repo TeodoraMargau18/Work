@@ -12,16 +12,15 @@ import java.util.Map;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-
 //-----------------petru a injecta din properties-------------
 @PropertySource("classpath:games.properties")
 public class GameSettings {
 
-    @Value("${app.version:0.0.0.0")
+    @Value("${app.version:0.0.0.0}")
     private  String version;
     @Value("${description}")
     private String description;
-    @Value("${no.max.players")
+    @Value("${no.max.players}")
     private int maxPlayers;
     @Value("${developers}")
     private String[] developers;
