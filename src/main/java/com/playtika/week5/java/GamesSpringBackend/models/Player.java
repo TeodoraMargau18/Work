@@ -1,23 +1,21 @@
 package com.playtika.week5.java.GamesSpringBackend.models;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 
-@Entity()
 //Dc nu dat @Table=> acelasi e si numele tabelei
 //clasa java e vazuta ca o entitate logica in hibertnate
 //aceasta entitate este folosita pe query-uri
 //dc nu pun name , implicit e numele clasei
 
 
-@Table(name="players")//numele din baza de date
+@Entity()
+@Table(name = "players")//numele din baza de date
 public class Player {
 
     public enum PlayerGender {
         //ca si ordinal va pune 0,1,2
-        MALE,FEMALE, NOT_DISCLOSED
+        MALE, FEMALE, NOT_DISCLOSED
     }
 
     @Id
@@ -41,6 +39,12 @@ public class Player {
     @Column(name = "player_birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthday;
+
+    //    @OneToOne(mappedBy = "player")//asta e numele campului din
+//    // billingAdress cu carese face legatura
+
+    @OneToOne(mappedBy = "player",cascade = CascadeType.ALL)
+    private BillingAddress billingAddress;
 
     public long getId() {
         return id;
@@ -88,5 +92,13 @@ public class Player {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 }

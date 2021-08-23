@@ -1,22 +1,34 @@
 package com.playtika.week5.java.GamesSpringBackend.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "billing_addresses")
 public class BillingAddress {
 
     @Id
-    @Column(name="player_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name="city")
     private String city;
     @Column(name="street")
     private String street;
+
+//    @OneToOne
+//    //name=numele atributului din coloana copil
+////    referencedCollumn
+////    @JoinColumn(name = "id",
+////    referencedColumnName = "player_id")
+//    @MapsId//id_Players are
+//    private Player player;
+
+    @JsonIgnore
+    @OneToOne()
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     public long getId() {
         return id;
@@ -40,5 +52,13 @@ public class BillingAddress {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
