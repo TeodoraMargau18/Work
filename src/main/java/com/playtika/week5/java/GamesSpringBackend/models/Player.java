@@ -2,6 +2,7 @@ package com.playtika.week5.java.GamesSpringBackend.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 //Dc nu dat @Table=> acelasi e si numele tabelei
 //clasa java e vazuta ca o entitate logica in hibertnate
@@ -45,6 +46,14 @@ public class Player {
 
     @OneToOne(mappedBy = "player",cascade = CascadeType.ALL)
     private BillingAddress billingAddress;
+
+
+//    varianta in care se creaza o tabela intermediara
+    @ManyToMany
+    @JoinTable(name="player_games",
+            joinColumns = @JoinColumn(name = "player_id"),
+    inverseJoinColumns = @JoinColumn(name="game_id"))
+    List<Game> games;
 
     public long getId() {
         return id;
@@ -100,5 +109,13 @@ public class Player {
 
     public void setBillingAddress(BillingAddress billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }

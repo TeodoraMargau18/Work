@@ -1,7 +1,10 @@
 package com.playtika.week5.java.GamesSpringBackend.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "games")
@@ -20,6 +23,10 @@ public class Game {
     @Column(name = "game_type")
     @Enumerated(EnumType.ORDINAL)
     private GameType gameType;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "games")
+    List<Player> players;
 
     public long getId() {
         return id;
@@ -43,5 +50,13 @@ public class Game {
 
     public void setGameType(GameType gameType) {
         this.gameType = gameType;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }
